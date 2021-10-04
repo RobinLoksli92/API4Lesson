@@ -22,12 +22,12 @@ def main():
     telegram_bot_token = os.getenv('TELEGRAM_BOT')
     bot = telegram.Bot(telegram_bot_token)
     path_for_photos = 'images'
-
+    chat_id = '@space_photos_python_tg'  # Здесь введите телеграмм канал, в котором вы сделали администратором своего бота
 
     while True:
         for path_for_photo in listdir(path_for_photos):
             bot.send_photo(
-                chat_id='@space_photos_python_tg',
+                chat_id=chat_id,
                 photo=open(f'images/{path_for_photo}', 'rb')
             )
             time.sleep(24*60*60)
