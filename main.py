@@ -9,29 +9,36 @@ from fetch_spacex import fetch_spacex_last_launch
 from fetch_nasa import fetch_nasa_epic_images, fetch_nasa_image_of_the_day
 
 
-def main():
-    url_for_hubble = 'https://upload.wikimedia.org/wikipedia/commons/3/3f/HST-SM4.jpeg'
-    
-    Path('C:/VScode_projects/API4Lesson/images').mkdir(parents=True, exist_ok=True)
+def upload_the_images(path_for_images):
+    fetch_nasa_epic_images(path_for_images)
+    fetch_spacex_last_launch(path_for_images)
+    fetch_nasa_image_of_the_day(path_for_images)
 
-    fetch_nasa_epic_images()
-    fetch_spacex_last_launch()
-    fetch_nasa_image_of_the_day()
 
-    load_dotenv()
-    telegram_bot_token = os.getenv('TELEGRAM_BOT')
-    bot = telegram.Bot(telegram_bot_token)
-    path_for_photos = 'images'
-    chat_id = '@space_photos_python_tg'  # Здесь введите телеграмм канал, в котором вы сделали администратором своего бота
+def send_photo_to_telegram_channel(bot, path_for_images):
+    chat_id = os.getenv('TELEGRAM_CHANNEL_ID')
 
     while True:
-        for path_for_photo in listdir(path_for_photos):
-            bot.send_photo(
-                chat_id=chat_id,
-                photo=open(f'images/{path_for_photo}', 'rb')
-            )
+        for path_for_photo in listdir(path_for_images):
+            with open(f'images/{path_for_photo}', 'rb') as space_photo:
+                bot.send_photo(
+                    chat_id=chat_id,
+                    photo=space_photo
+                )
             time.sleep(24*60*60)
 
+
+def main():
+    Path('images').mkdir(parents=True, exist_ok=True)
+    path_for_images = 'images'
+
+    upload_the_images(path_for_images)
+
+    load_dotenv()
+    telegram_bot_token = os.getenv('TELEGRAM_BOT_TOKEN')
+    bot = telegram.Bot(telegram_bot_token)
+    send_photo_to_telegram_channel(bot, path_for_images)
+    
 
 if __name__ == '__main__':
     main()
