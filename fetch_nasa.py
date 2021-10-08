@@ -3,8 +3,6 @@ import os
 from split_expansion import split_the_extension
 from save_image import save_image_from_url
 import datetime
-from dotenv import load_dotenv, main
-from pprint import pprint
 
 
 def fetch_nasa_image_of_the_day(path_for_images):
@@ -21,17 +19,15 @@ def fetch_nasa_image_of_the_day(path_for_images):
 
     for number_of_pictire, picture in enumerate(pictures_of_the_day):
         url_of_apod = picture.get('url')
-        pprint(url_of_apod)
         expansion_of_file = split_the_extension(url_of_apod)
         filename = f'{path_for_images}/APOD_{number_of_pictire}.{expansion_of_file}'
         save_image_from_url(url_of_apod,filename)
 
 
-def fetch_nasa_epic_images(path_for_images):
-    load_dotenv()
+def fetch_nasa_epic_images(path_for_images, nasa_api_key):
     url_for_epic = 'https://api.nasa.gov/EPIC/api/natural/images'
     payload = {
-        'api_key': os.getenv('NASA_API_KEY')
+        'api_key':nasa_api_key
     }
 
     response = requests.get(url_for_epic, params=payload)
