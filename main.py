@@ -12,7 +12,7 @@ from fetch_nasa import fetch_nasa_epic_images, fetch_nasa_image_of_the_day
 def download_images(path_for_images, number_of_spacex_launch, nasa_api_key):
     fetch_nasa_epic_images(path_for_images, nasa_api_key)
     fetch_spacex_some_launch(path_for_images, number_of_spacex_launch)
-    fetch_nasa_image_of_the_day(path_for_images)
+    fetch_nasa_image_of_the_day(path_for_images, nasa_api_key)
 
 
 def send_photo_to_telegram_channel(bot, path_for_images,channel_chat_id):

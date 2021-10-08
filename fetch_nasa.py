@@ -1,16 +1,15 @@
 import requests
-import os
 from split_expansion import split_the_extension
 from save_image import save_image_from_url
 import datetime
 
 
-def fetch_nasa_image_of_the_day(path_for_images):
+def fetch_nasa_image_of_the_day(path_for_images,nasa_api_key):
     url = 'https://api.nasa.gov/planetary/apod'
 
     payload = {
         'count': 30,
-        'api_key':'PrwXPBykBiowDIBWnlELW7tH7ooxpl343nCUhe5z',
+        'api_key':nasa_api_key
     }
 
     response = requests.get(url, params=payload)

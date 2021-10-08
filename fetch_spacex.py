@@ -1,5 +1,4 @@
 import requests
-import os
 from split_expansion import split_the_extension
 from save_image import save_image_from_url
 
