@@ -9,7 +9,7 @@ from fetch_spacex import fetch_spacex_last_launch
 from fetch_nasa import fetch_nasa_epic_images, fetch_nasa_image_of_the_day
 
 
-def upload_the_images(path_for_images):
+def download_images(path_for_images):
     fetch_nasa_epic_images(path_for_images)
     fetch_spacex_last_launch(path_for_images)
     fetch_nasa_image_of_the_day(path_for_images)
@@ -32,7 +32,7 @@ def main():
     Path('images').mkdir(parents=True, exist_ok=True)
     path_for_images = 'images'
 
-    upload_the_images(path_for_images)
+    download_images(path_for_images)
 
     load_dotenv()
     telegram_bot_token = os.getenv('TELEGRAM_BOT_TOKEN')
