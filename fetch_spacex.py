@@ -4,9 +4,9 @@ from split_expansion import split_the_extension
 from save_image import save_image_from_url
 
 
-def fetch_spacex_last_launch(path_for_images):
-    url_for_launch_number_60 = 'https://api.spacexdata.com/v3/launches/60'
-    response = requests.get(url_for_launch_number_60)
+def fetch_spacex_some_launch(path_for_images,number_of_launch):
+    url_for_some_launch = f'https://api.spacexdata.com/v3/launches/{number_of_launch}'
+    response = requests.get(url_for_some_launch)
     response.raise_for_status()
 
     rocket_info = response.json()
