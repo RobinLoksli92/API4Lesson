@@ -4,7 +4,7 @@ from save_image import save_image_from_url
 import datetime
 
 
-def fetch_nasa_image_of_the_day(path_for_images,nasa_api_key):
+def fetch_nasa_image_of_the_day(images_path,nasa_api_key):
     url = 'https://api.nasa.gov/planetary/apod'
 
     payload = {
@@ -16,20 +16,20 @@ def fetch_nasa_image_of_the_day(path_for_images,nasa_api_key):
     response.raise_for_status()
     pictures_of_the_day = response.json()
 
-    for number_of_pictire, picture in enumerate(pictures_of_the_day):
-        url_of_apod = picture.get('url')
-        expansion_of_file = split_the_extension(url_of_apod)
-        filename = f'{path_for_images}/APOD_{number_of_pictire}.{expansion_of_file}'
-        save_image_from_url(url_of_apod,filename)
+    for pictire_number, picture in enumerate(pictures_of_the_day):
+        apod_url = picture.get('url')
+        file_extension = split_the_extension(apod_url)
+        filename = f'{images_path}/APOD_{pictire_number}.{file_extension}'
+        save_image_from_url(apod_url,filename)
 
 
-def fetch_nasa_epic_images(path_for_images, nasa_api_key):
-    url_for_epic = 'https://api.nasa.gov/EPIC/api/natural/images'
+def fetch_nasa_epic_images(images_path, nasa_api_key):
+    epic_url = 'https://api.nasa.gov/EPIC/api/natural/images'
     payload = {
         'api_key':nasa_api_key
     }
 
-    response = requests.get(url_for_epic, params=payload)
+    response = requests.get(epic_url, params=payload)
     response.raise_for_status()
 
     epic_pictures = response.json()
@@ -40,16 +40,8 @@ def fetch_nasa_epic_images(path_for_images, nasa_api_key):
         data = data[:10]
         data = datetime.date.fromisoformat(data)
         data = data.strftime('%Y/%m/%d')
-        template_of_url = f'https://api.nasa.gov/EPIC/archive/natural/{data}/png/{image_name}.png'
-        filename = f'{path_for_images}/{image_name}.png'
-        save_image_from_url(template_of_url, filename, params=payload)
+        url_template = f'https://api.nasa.gov/EPIC/archive/natural/{data}/png/{image_name}.png'
+        filename = f'{images_path}/{image_name}.png'
+        save_image_from_url(url_template, filename, params=payload)
         with open(filename, 'wb') as file:
             file.write(response.content)
-
-
-def main():
-    pass
-    
-
-if __name__ == '__main__':
-    main()
