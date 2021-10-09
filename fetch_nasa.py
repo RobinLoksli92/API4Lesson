@@ -43,5 +43,3 @@ def fetch_nasa_epic_images(images_path, nasa_api_key):
         url_template = f'https://api.nasa.gov/EPIC/archive/natural/{data}/png/{image_name}.png'
         filename = f'{images_path}/{image_name}.png'
         save_image_from_url(url_template, filename, params=payload)
-        with open(filename, 'wb') as file:
-            file.write(response.content)
