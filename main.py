@@ -15,7 +15,7 @@ def download_images(images_path, spacex_launch_number, nasa_api_key):
     fetch_nasa_image_of_the_day(images_path, nasa_api_key)
 
 
-def send_photo_to_telegram_channel(bot, images_path,channel_chat_id):
+def send_photo_to_telegram_channel(bot, images_path, channel_chat_id):
     while True:
         for photo_path in listdir(images_path):
             with open(f'{images_path}/{photo_path}', 'rb') as space_photo:

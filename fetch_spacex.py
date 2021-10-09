@@ -3,7 +3,7 @@ from split_extension import split_extension
 from save_image import save_image_from_url
 
 
-def fetch_spacex_some_launch(images_path,spacex_launch_number):
+def fetch_spacex_some_launch(images_path, spacex_launch_number):
     some_launch_launch = f'https://api.spacexdata.com/v3/launches/{spacex_launch_number}'
     response = requests.get(some_launch_launch)
     response.raise_for_status()
