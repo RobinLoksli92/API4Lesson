@@ -35,11 +35,11 @@ def fetch_nasa_epic_images(images_path, nasa_api_key):
     epic_pictures = response.json()
 
     for picture in epic_pictures[:5]:
-        data = picture.get('date')
+        date = picture.get('date')
         image_name = picture.get('image')
-        data = data[:10]
-        data = datetime.date.fromisoformat(data)
-        data = data.strftime('%Y/%m/%d')
-        url_template = f'https://api.nasa.gov/EPIC/archive/natural/{data}/png/{image_name}.png'
+        date = date[:10]
+        date = datetime.date.fromisoformat(date)
+        date = date.strftime('%Y/%m/%d')
+        url_template = f'https://api.nasa.gov/EPIC/archive/natural/{date}/png/{image_name}.png'
         filename = f'{images_path}/{image_name}.png'
         save_image_from_url(url_template, filename, params=payload)
