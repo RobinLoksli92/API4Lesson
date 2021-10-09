@@ -8,8 +8,8 @@ def fetch_spacex_some_launch(images_path, spacex_launch_number):
     response = requests.get(some_launch_launch)
     response.raise_for_status()
 
-    rocket_info = response.json()
-    launch_links = rocket_info['links']
+    some_launch_discription = response.json()
+    launch_links = some_launch_discription['links']
     launch_images = launch_links.get('flickr_images')
 
     for image_number, image_url in enumerate(launch_images):
