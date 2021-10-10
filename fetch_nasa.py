@@ -1,7 +1,8 @@
-import requests
-from split_extension import split_the_extension
-from save_image import save_image_from_url
 import datetime
+import requests
+
+from save_image import save_image_from_url
+from split_extension import split_extension
 
 
 def fetch_nasa_image_of_the_day(images_path,nasa_api_key):
@@ -18,7 +19,7 @@ def fetch_nasa_image_of_the_day(images_path,nasa_api_key):
 
     for pictire_number, picture in enumerate(pictures_of_the_day):
         apod_url = picture.get('url')
-        file_extension = split_the_extension(apod_url)
+        file_extension = split_extension(apod_url)
         filename = f'{images_path}/APOD_{pictire_number}.{file_extension}'
         save_image_from_url(apod_url,filename)
 

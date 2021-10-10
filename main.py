@@ -1,12 +1,13 @@
-import os
 from os import listdir
-from pathlib import Path
-import telegram
-import time
 from dotenv import load_dotenv
+import os
+from pathlib import Path
+import time
 
-from fetch_spacex import fetch_spacex_some_launch
+import telegram
+
 from fetch_nasa import fetch_nasa_epic_images, fetch_nasa_image_of_the_day
+from fetch_spacex import fetch_spacex_some_launch
 
 
 def download_images(images_path, spacex_launch_number, nasa_api_key):

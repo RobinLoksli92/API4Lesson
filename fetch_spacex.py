@@ -1,6 +1,7 @@
 import requests
-from split_extension import split_extension
+
 from save_image import save_image_from_url
+from split_extension import split_extension
 
 
 def fetch_spacex_some_launch(images_path, spacex_launch_number):

@@ -1,5 +1,5 @@
-from urllib.parse import urlparse, urlsplit
 import os
+from urllib.parse import urlparse, urlsplit
 
 
 def split_extension(url):
